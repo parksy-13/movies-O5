@@ -1,7 +1,12 @@
 const service= config.apikey;
 
-const url = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=${service}`
+const url1= `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${service}`
+const url2 = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=${service}`
 
-fetch(url)
+fetch(url1)
+  .then(response => response.json())
+  .then(response => console.log(response))
+
+  fetch(url2)
   .then(response => response.json())
   .then(response => console.log(response))
