@@ -37,3 +37,16 @@
     margin : 10px 0px 0px 520px;
     list-style-type: none;
 }
+
+/* 상세페이지 버튼 css */
+body {
+    position: relative;
+}
+
+.button-container {
+    position: absolute;
+    top: 10px;
+    /*  상단 여백 값 */
+    right: 10px;
+    /* 우측 여백 값 */
+}
