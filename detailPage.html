@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="detailPage.css">
-    <title>영화 상세 정보</title>
-  </head>
-  <body>
-    <div id="detailContainer">
-      <!-- 여기에 영화 상세 정보가 자동으로 채워집니다. -->
-    </div>
 
-    <p id="movieTitle"></p>
-    <p id="openDate"></p>
-    <p id="rank"></p>
-    <!-- 기타 페이지 요소들을 추가할 수 있습니다. -->
-    <form class = messagebox>
-      <ul>
-        <input id="userName" type="text" placeholder="Name...">
-        <input id="password" type="password" placeholder="Password...">
-        <button onclick="uploadbutton()">Upload</button>
-      </ul>
-        <ul class = reviewbox>
-        <textarea id="reviewtextinput" class="userReview" placeholder="Review..."></textarea>
-      </ul>
-      </form>
-        <form id="makeReviewed">
-      </form>
-    <script src="apikey.js"></script>
-    <script src="script.js"></script>
-    <script src="detailPage.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="detailPage.css">
+  <link rel="stylesheet" href="button.css">
+  <title>영화 상세 정보</title>
+</head>
+
+<body>
+  <div id="detailContainer">
+    <!-- 여기에 영화 상세 정보가 자동으로 채워집니다. -->
+  </div>
+
+  <p id="movieTitle"></p>
+  <p id="openDate"></p>
+  <p id="rank"></p>
+  <!-- 기타 페이지 요소들을 추가할 수 있습니다. -->
+  <form class=messagebox>
+    <ul>
+      <input id="userName" type="text" placeholder="Name...">
+      <input id="password" type="password" placeholder="Password...">
+      <button onclick="uploadbutton()">Upload</button>
+    </ul>
+    <ul class=reviewbox>
+      <textarea id="reviewtextinput" class="userReview" placeholder="Review..."></textarea>
+    </ul>
+  </form>
+  <form id="makeReviewed">
+  </form>
+  
+  <!-- 상세페이지에서 뒤로가기 버튼 -->
+  <div class="button-container">
+    <button onclick="goBack()">뒤로 가기</button>
+  </div>
+
+
+  <script src="apikey.js"></script>
+  <script src="script.js"></script>
+  <script src="detailPage.js"></script>
+  <script src="button.js"></script>
+</body>
+
 </html>
