@@ -1,13 +1,14 @@
 //  api 연결
-const service = config.apikey;
+const key = config.apikey;
 
-const urlBoxoffice = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=${service}&targetDt=20231229`; //주간/주말 박스오피스
-const urlInformation = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=${service}&movieCd=20124080`; //영화 상세 정보
-const urlList = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${service}&itemPerPage=20`; //영화 목록
+const address = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest'
+
+const urlBoxoffice = `${address}/boxoffice/searchWeeklyBoxOfficeList.json?key=${key}&targetDt=20231229`; //주간/주말 박스오피스
+
+const urlInformation = `${address}/movie/searchMovieInfo.json?key=${key}&movieCd=20124080`; //영화 상세 정보
+
+const urlList = `${address}/rest/movie/searchMovieList.json?key=${key}&itemPerPage=20`; //영화 목록
 // 박스오피스 정보로 영화 카드 생성
-console.log(urlBoxoffice);
-console.log(urlInformation);
-console.log(urlList);
 
 fetch(urlBoxoffice)
   .then((response) => response.json())
@@ -32,7 +33,7 @@ fetch(urlBoxoffice)
       temp_html += `
         <div class="col">
           <a href="detailPage.html?movieCd=${movieCd}"> 
-            <img src ='slateImage.png' alt="">
+            <img src ='./posters/"no${rank}"' alt="" style="width:50%;height:30%;border:auto;">
             <div class="wrap">
               <h2>${movieTitle}</h2>
               <h3>${rank}</h3>
@@ -68,14 +69,3 @@ const searchBtn = () => {
     }
   }
 };
-
-// 영화 상세 정보(배우명, 역할명) 추가 -> 다른 html,js에 필요한 정보입니다! 이 fetch함수 복붙하시고 두번째 then에 이어서 실행해주세요!
-
-// fetch(urlInformation)
-//   .then((response) => response.json())
-//   .then((response) => console.log(response));
-
-// // 영화 목록
-// fetch(urlList)
-//   .then(response => response.json())
-//   .then(response => console.log(response))

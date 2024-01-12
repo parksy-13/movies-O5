@@ -1,3 +1,7 @@
+*{
+    font-family: 'Hi Melody', sans-serif;
+}
+
 .messagebox {
     margin : 0px auto 10px auto;
     border: solid 1px black;
