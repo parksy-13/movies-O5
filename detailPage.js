@@ -1,3 +1,9 @@
+// 브라우저의 뒤로 가기 기능 사용
+function goBack() {
+  window.history.back();
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
   // URL 파라미터에서 필요한 정보들을 읽어옴
   const urlParams = new URLSearchParams(window.location.search);
@@ -35,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const detailContainer = document.getElementById("detailContainer");
         detailContainer.innerHTML = `
             <h2>영화 상세 정보</h2>
+            <img src ='./posters/no${rank}.jpg' alt="" style="width:20%;height:10%;border:auto; justify-content: center">
             <p>영화 제목: ${movieInfo.movieNm}</p>
             <p>장르: ${movieInfo.genres
               .map((genre) => genre.genreNm)
@@ -57,10 +64,16 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Data not found in local storage");
   }
 });
+
+// 리뷰창 기능
 function ulbutton (){
   let userName = document.getElementById("userName").value;
+  localStorage.setItem('userName',userName);
   let password = document.getElementById("password").value;
+  localStorage.setItem('password',password);
   let reviewtext = document.getElementById("reviewtextinput").value;
+  localStorage.setItem('reviewtext',reviewtext);
+  localStorage.getItem('userName','password','reviewtext');
   let checking = userName.length * password.length * reviewtext.length;
   if (checking === 0){
       alert("작성이 완료되지 않았습니다.");

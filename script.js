@@ -33,7 +33,7 @@ fetch(urlBoxoffice)
       temp_html += `
         <div class="col">
           <a href="detailPage.html?movieCd=${movieCd}"> 
-            <img src ='./posters/"no${rank}"' alt="" style="width:50%;height:30%;border:auto;">
+            <img src ='./posters/no${rank}.jpg' alt="" style="width:50%;height:30%;border:auto;">
             <div class="wrap">
               <h2>${movieTitle}</h2>
               <h3>${rank}</h3>
@@ -69,3 +69,9 @@ const searchBtn = () => {
     }
   }
 };
+
+function resetBtn(){
+  location.reload();
+}
+
+let gobackBtn = () => window.scrollTo(0, 0);
