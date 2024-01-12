@@ -32,7 +32,7 @@ fetch(urlBoxoffice)
       temp_html += `
         <div class="col">
           <a href="detailPage.html?movieCd=${movieCd}"> 
-            <img src ='slateImage.png' alt="">
+            <img src ='slateImage.png' alt="" style="width:20%;height:20%;border:auto;">
             <div class="wrap">
               <h2>${movieTitle}</h2>
               <h3>${rank}</h3>
@@ -68,14 +68,3 @@ const searchBtn = () => {
     }
   }
 };
-
-// 영화 상세 정보(배우명, 역할명) 추가 -> 다른 html,js에 필요한 정보입니다! 이 fetch함수 복붙하시고 두번째 then에 이어서 실행해주세요!
-
-// fetch(urlInformation)
-//   .then((response) => response.json())
-//   .then((response) => console.log(response));
-
-// // 영화 목록
-// fetch(urlList)
-//   .then(response => response.json())
-//   .then(response => console.log(response))
