@@ -57,3 +57,31 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Data not found in local storage");
   }
 });
+function uploadbutton (){
+  const userName = document.getElementById("userName").value;
+  const password = document.getElementById("password").value;
+  const reviewtext = document.getElementById("reviewtextinput").value;
+  const checking = userName.length * password.length * reviewtext.length;
+  if (checking === 0){
+      alert("작성이 완료되지 않았습니다.");
+  }
+  else if (password !== "sparta"){
+      alert("비밀번호가 올바르지 않습니다.");
+  }
+  else {
+  const reviewed = `
+  <form class = "reviewed">
+  <li class="userId">
+  ID : ${userName}
+  </li>
+  <ul>
+      <textarea readonly rows ="8" cols ="85" class="userReview">${reviewtext}</textarea>
+  </ul>
+  </form>
+  `;
+  const node = document.createElement(`div`);
+  node.innerHTML = reviewed;
+  console.log(node);
+  document.getElementById("makeReviewed").appendChild(node);
+  };
+};  
