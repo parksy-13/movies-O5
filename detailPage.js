@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 영화 상세 정보 가져오기
     const service = config.apikey;
-    const urlInformation = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=${service}&movieCd=20203702`; //영화 상세 정보
+    const urlInformation = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=${service}&movieCd=${movieCd}`; //영화 상세 정보
 
     console.log(urlInformation);
 
