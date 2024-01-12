@@ -1,3 +1,7 @@
+*{
+    font-family: 'Hi Melody', sans-serif;
+}
+
 .messagebox {
     margin : 0px auto 10px auto;
     border: solid 1px black;
@@ -32,4 +36,16 @@
     font-size: 14px;
     margin : 10px 0px 0px 520px;
     list-style-type: none;
+}
+
+body {
+    position: relative;
+}
+
+.button-container {
+    position: absolute;
+    top: 10px;
+    /*  상단 여백 값 */
+    right: 10px;
+    /* 우측 여백 값 */
 }
