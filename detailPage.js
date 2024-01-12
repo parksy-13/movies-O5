@@ -80,6 +80,11 @@ function ulbutton (){
   }
   else if (password !== "sparta"){
       alert("비밀번호가 올바르지 않습니다.");
+      // 비밀번호를 sparta로 특정하지 않고
+      // 입력한 userName의 인덱스를 localStorage에서 찾고,
+      // userName의 인덱스 === password의 인덱스인지 확인하고 맞으면
+      // 계속 진행, 맞지 않으면 위의 alert창이
+      // 뜨도록 하는거 어떨까요!!
   }
   else {
   const reviewed = `
