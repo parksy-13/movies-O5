@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>O5's 영화 컬렉션</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
     <header>영화 상세 정보</header>
-
     <section id="movieSearchCards">
-        <h1>Search movies</h1>
-        <div id="search">
-            <form>
-                <fieldset>
-                    <input id="movieNameInput" type="text" placeholder="영화 제목을 입력하세요">
-                    <button type="button" onclick="searchBtn()">Search</button>
-                </fieldset>
-            </form> 
-        </div>
+      <h1>Search movies</h1>
+      <div id="search">
+        <form>
+          <fieldset>
+            <input
+              id="movieNameInput"
+              type="text"
+              placeholder="영화 제목을 입력하세요"
+            />
+            <button type="button" onclick="searchBtn()">Search</button>
+          </fieldset>
+        </form>
+      </div>
 
-<div id="cards">
-    <div class="inner">
-        <div id="cardsBox" class="wrapper">
+      <div id="cards">
+        <div class="inner">
+          <div id="cardsBox" class="wrapper">
             <div class="col"></div>
+          </div>
         </div>
-    </div>
-
-</div>
-
+      </div>
     </section>
-<footer>Node.js O5의 작품입니다</footer>
-
+    <footer>Node.js O5의 작품입니다</footer>
     <script src="apikey.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
