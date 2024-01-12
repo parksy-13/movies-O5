@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //   document.getElementById("rank").textContent = `Rank: ${rank}`;
 
     // 영화 상세 정보 가져오기
-    const service = config.apikey;
+    const key = config.apikey;
     const urlInformation = `${address}/movie/searchMovieInfo.json?key=${key}&movieCd=${movieCd}`; //영화 상세 정보
 
     console.log(urlInformation);
