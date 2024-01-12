@@ -1,0 +1,35 @@
+.messagebox {
+    margin : 0px auto 10px auto;
+    border: solid 1px black;
+    border-radius: 20px;
+    width : 800px;
+    height : 140px;
+    justify-content: space-between;
+}
+.userReview {
+    width : 720px;
+    height : 70px;
+    text-align: top;
+    border-radius: 5px;
+}
+#userName {
+    margin : 0px 10px 0px 350px;
+    width : 100px;
+    height : 20px;
+}
+#password {
+    width : 180px;
+    height : 20px;
+}
+.reviewed {
+    width : 800px;
+    height : 130px;
+    margin: 0px auto 10px auto;
+    border : solid 1px black;
+    border-radius: 20px;
+}
+.userId {
+    font-size: 14px;
+    margin : 10px 0px 0px 520px;
+    list-style-type: none;
+}
