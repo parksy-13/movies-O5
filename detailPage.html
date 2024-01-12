@@ -17,16 +17,16 @@
     <!-- 기타 페이지 요소들을 추가할 수 있습니다. -->
     <form class = messagebox>
       <ul>
-        <input id="userName" type="text" placeholder="Name...">
-        <input id="password" type="password" placeholder="Password...">
-        <button onclick="uploadbutton()">Upload</button>
+      <input id="userName" type="text" placeholder="Name...">
+      <input id="password" type="text" placeholder="Password...">
+      <button id="uploadbutton" onclick="ulbutton(); return false;">Uplaod</button>
       </ul>
-        <ul class = reviewbox>
-        <textarea id="reviewtextinput" class="userReview" placeholder="Review..."></textarea>
+      <ul class = reviewbox>
+      <input id="reviewtextinput" class="userReview" type ="textarea" placeholder="Review...">
       </ul>
-      </form>
-        <form id="makeReviewed">
-      </form>
+  </form>
+  <form id="makeReviewed">
+  </form>
     <script src="apikey.js"></script>
     <script src="script.js"></script>
     <script src="detailPage.js"></script>

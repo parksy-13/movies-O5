@@ -57,11 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Data not found in local storage");
   }
 });
-function uploadbutton (){
-  const userName = document.getElementById("userName").value;
-  const password = document.getElementById("password").value;
-  const reviewtext = document.getElementById("reviewtextinput").value;
-  const checking = userName.length * password.length * reviewtext.length;
+function ulbutton (){
+  let userName = document.getElementById("userName").value;
+  let password = document.getElementById("password").value;
+  let reviewtext = document.getElementById("reviewtextinput").value;
+  let checking = userName.length * password.length * reviewtext.length;
   if (checking === 0){
       alert("작성이 완료되지 않았습니다.");
   }
@@ -79,9 +79,14 @@ function uploadbutton (){
   </ul>
   </form>
   `;
+  
   const node = document.createElement(`div`);
   node.innerHTML = reviewed;
   console.log(node);
   document.getElementById("makeReviewed").appendChild(node);
+  alert ("작성이 완료되었습니다.")
   };
-};  
+  document.getElementById("userName").value='';
+  document.getElementById("password").value='';
+  document.getElementById("reviewtextinput").value='';
+};
