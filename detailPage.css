@@ -43,10 +43,16 @@ body {
     position: relative;
 }
 
-.button-container {
+.button-container button {
+    border: none;
+    background-color: transparent;
     position: absolute;
     top: 10px;
     /*  상단 여백 값 */
     right: 10px;
     /* 우측 여백 값 */
+}
+
+.button-container button:hover {
+    background-color: lightcoral;
 }
