@@ -11,11 +11,24 @@ header{
     font-family: 'Hi Melody', sans-serif;
 }
 
+#movieSearchCards > h1{
+    border-style: dotted;
+    justify-content: center;
+    margin-left: 40%;
+    margin-right: 40%;
+    text-align: center;
+}
+
+#movieSearchCards > h1:hover{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
 #search form fieldset{
     border-color: white;
     border-style:double;
     background-color: black;
-    width: 550px;
+    width: 400px;
     height: 50px;
     margin-left: auto;
     margin-right: auto;
