@@ -1,7 +1,15 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=😀5&fontSize=80)
 
 <h1><img src = "Baby Chick.png" width="50" height="50"/>Project Introduction!</h1>
-
+    <style>
+    @font-face {
+        font-family: "KCCChassam";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCCChassam.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+      </style>
 스파르타 코딩클럽 내일배움캠프 O5 팀 과제 입니다.<br>
 협업을 통해 영화소개페이지를 제작했습니다.
 
