@@ -14,7 +14,9 @@
   <body>
     <header>O5 Boxoffice</header>
     <section id="movieSearchCards">
-      <h1>Search movies</h1>
+      <div class="reset">
+        <button type="button" onclick="resetBtn()"  style="text-align: center;">Search movies</button>
+      </div>
       <div id="search">
         <form>
           <fieldset>
@@ -36,7 +38,7 @@
         </div>
       </div>
     </section>
-    <footer>Node.js O5의 작품입니다</footer>
+    <footer><button type="button" onclick="gobackBtn()" style="font-family: 'Hi Melody', sans-serif; border: none; background-color:transparent;color:white; font-size: 30px;">↑ Node.js O5의 작품입니다</button></footer>
     <script src="apikey.js"></script>
     <script src="script.js"></script>
   </body>
