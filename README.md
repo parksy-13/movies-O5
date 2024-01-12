@@ -26,6 +26,6 @@ IDE : - <br>
 Framework : -
 
 <h1>📌 Main Functions</h1>
-* [x] 메인 화면<br> 
+메인 화면<br> 
 영화 목록<br>
 리뷰 작성<br>
