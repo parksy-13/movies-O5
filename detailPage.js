@@ -66,45 +66,96 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // 리뷰창 기능
-function ulbutton (){
+function ulbutton (event){ //생성버튼 clear
+  event.preventDefault();
+  let userCount = localStorage.getItem('userCount');
   let userName = document.getElementById("userName").value;
-  localStorage.setItem('userName',userName);
   let password = document.getElementById("password").value;
-  localStorage.setItem('password',password);
   let reviewtext = document.getElementById("reviewtextinput").value;
-  localStorage.setItem('reviewtext',reviewtext);
-  localStorage.getItem('userName','password','reviewtext');
-  let checking = userName.length * password.length * reviewtext.length;
-  if (checking === 0){
+  const checking = userName.length * password.length * reviewtext.length;
+  if (checking === 0){ //작성상태 확인
       alert("작성이 완료되지 않았습니다.");
   }
-  else if (password !== "sparta"){
-      alert("비밀번호가 올바르지 않습니다.");
-      // 비밀번호를 sparta로 특정하지 않고
-      // 입력한 userName의 인덱스를 localStorage에서 찾고,
-      // userName의 인덱스 === password의 인덱스인지 확인하고 맞으면
-      // 계속 진행, 맞지 않으면 위의 alert창이
-      // 뜨도록 하는거 어떨까요!!
+  else if(!localStorage.getItem('userCount')){ // 웹페이지 초기상태
+      localStorage.setItem('userCount',0);
+      localStorage.setItem(`${localStorage.getItem('userCount')}userName`,userName);
+      localStorage.setItem(`${localStorage.getItem('userCount')}password`,password);
+      localStorage.setItem(`${localStorage.getItem('userCount')}reviewtext`,reviewtext);
+      createcard(userName, reviewtext);
+      ++userCount;
+      localStorage.setItem('userCount',userCount);
+      alert("작성 되었습니다.");
+    }
+  else if (localStorage.valueOf().indexOf === -1) { //기존 정보가 없고, Id가 겹치지 않을때 (현재 작동 안함)
+      localStorage.setItem(`${localStorage.getItem('userCount')}userName`,userName);
+      localStorage.setItem(`${localStorage.getItem('userCount')}password`,password);
+      localStorage.setItem(`${localStorage.getItem('userCount')}reviewtext`,reviewtext);
+      createcard(userName, reviewtext);
+      ++userCount;
+      localStorage.setItem('userCount',userCount);
+      alert("작성 되었습니다.");
+    }
+  else if(matchingUser(userName, password)){ //기존 정보가 있을때  (이것만 작동하는듯? 근거 : 유저카운트가 안올라감)
+      createcard(userName, reviewtext);
+      alert("작성 되었습니다.");
   }
-  else {
+  else { // 그 외
+      alert("Password가 틀렸습니다.");
+  }
+};
+
+function searchvalue (userName){
+  let i = 0;
+  while (true) {
+  let foundPos = [localStorage.valueOf()].indexOf(userName, pos);
+  if (foundPos == -1) break;
+  document.writeln( foundPos );
+  i = foundPos + 1; 
+}
+}
+
+
+function matchingUser(userName, password){ //유저가 맞는지에 대한 함수 불안정함 (작동안함)
+  let i = localStorage[userName].valueOf();
+  const savedName = localStorage.getItem(`${i}name`);
+  const savedPassword = localStorage.getItem(`${i}password`);
+  return (userName, password) => userName === savedName * password === savedPassword ? true : false;
+};
+
+function createcard(userName, reviewtext){ //리뷰카드를 만드는 함수 (잘작동함)
   const reviewed = `
-  <form class = "reviewed">
-  <li class="userId">
-  ID : ${userName}
-  </li>
-  <ul>
+  <form class = messagebox>
+      <ul>
+      <li class="userId">
+      ID : ${userName}
+      <input id="cppassword" type="text" placeholder="Password...">
+      <button id="DeleteBtn" onclick="deletecard(event);">Delete</button>
+      </ul>
+      <ul class = reviewbox>
       <textarea readonly rows ="8" cols ="85" class="userReview">${reviewtext}</textarea>
-  </ul>
+      </ul>
   </form>
   `;
-  
   const node = document.createElement(`div`);
   node.innerHTML = reviewed;
   console.log(node);
   document.getElementById("makeReviewed").appendChild(node);
-  alert ("작성이 완료되었습니다.")
-  };
   document.getElementById("userName").value='';
   document.getElementById("password").value='';
   document.getElementById("reviewtextinput").value='';
 };
+
+function deletecard(event){ // 삭제기능 (무조건 비밀번호가 다르다고 뜸)
+  event.preventDefault();
+  let cppassword = document.getElementById("cppassword").value;
+  if (cppassword === localStorage.getItem('password')){
+      localStorage.removeItem('userName');
+      localStorage.removeItem('password');
+      localStorage.removeItem('reviewtext');
+      alert("삭제되었습니다.")
+      location.reload(true)
+  }
+  else {
+      alert("비밀번호가 다릅니다.")
+  }
+}

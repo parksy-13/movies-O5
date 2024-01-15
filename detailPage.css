@@ -25,6 +25,10 @@
     width : 180px;
     height : 20px;
 }
+#cppassword{
+    width : 180px;
+    height : 20px;
+}
 .reviewed {
     width : 800px;
     height : 130px;
@@ -34,8 +38,10 @@
 }
 .userId {
     font-size: 14px;
-    margin : 10px 0px 0px 520px;
+    margin : 10px 20px 0px 100px;
+    padding : 0px 20px 0px 0px;
     list-style-type: none;
+    text-align: right;
 }
 
 /* 상세페이지 버튼 css */
