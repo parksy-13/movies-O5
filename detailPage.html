@@ -21,16 +21,16 @@
     <p id="openDate"></p>
     <p id="rank"></p>
     <!-- 기타 페이지 요소들을 추가할 수 있습니다. -->
-    <form class = messagebox>
+    <div class = messagebox>
       <ul>
       <input id="userName" type="text" placeholder="Name...">
       <input id="password" type="text" placeholder="Password...">
-      <button id="uploadbutton" onclick="ulbutton(); return false;">Uplaod</button>
+      <button id="uploadbutton">Upload</button>
       </ul>
       <ul class = reviewbox>
       <input id="reviewtextinput" class="userReview" type ="textarea" placeholder="Review...">
       </ul>
-  </form>
+    </div>
 
    <!-- 상세페이지에서 뒤로가기 버튼 -->
    <div class="button-container">
@@ -39,8 +39,8 @@
     </button>
   </div>
 
-  <form id="makeReviewed">
-  </form>
+  <div id="makeReviewed">
+  </div>
     <script src="apikey.js"></script>
     <script src="script.js"></script>
     <script src="detailPage.js"></script>

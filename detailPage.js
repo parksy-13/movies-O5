@@ -59,52 +59,67 @@ document.addEventListener("DOMContentLoaded", () => {
             <!-- 나머지 상세 정보 표시 추가 가능.. -->
           `;
       })
-      .catch((error) => console.error("영화 상세 정보 가져오기 오류:", error));
   } else {
     console.log("Data not found in local storage");
   }
 });
 
-// 리뷰창 기능
+// 리뷰창 업로드 기능
+// 새로고침하면 전역변수도 새로 선언되므로 count도 localStorage에 저장합니다.
+const upload = document.getElementById('uploadbutton');
+if(!localStorage.getItem('userCount')){
+  localStorage.setItem('userCount',0);
+}
 function ulbutton (){
-  let userName = document.getElementById("userName").value;
-  localStorage.setItem('userName',userName);
-  let password = document.getElementById("password").value;
-  localStorage.setItem('password',password);
-  let reviewtext = document.getElementById("reviewtextinput").value;
-  localStorage.setItem('reviewtext',reviewtext);
-  localStorage.getItem('userName','password','reviewtext');
-  let checking = userName.length * password.length * reviewtext.length;
-  if (checking === 0){
-      alert("작성이 완료되지 않았습니다.");
-  }
-  else if (password !== "sparta"){
-      alert("비밀번호가 올바르지 않습니다.");
-      // 비밀번호를 sparta로 특정하지 않고
-      // 입력한 userName의 인덱스를 localStorage에서 찾고,
-      // userName의 인덱스 === password의 인덱스인지 확인하고 맞으면
-      // 계속 진행, 맞지 않으면 위의 alert창이
-      // 뜨도록 하는거 어떨까요!!
-  }
-  else {
-  const reviewed = `
-  <form class = "reviewed">
-  <li class="userId">
-  ID : ${userName}
-  </li>
-  <ul>
-      <textarea readonly rows ="8" cols ="85" class="userReview">${reviewtext}</textarea>
-  </ul>
-  </form>
-  `;
-  
-  const node = document.createElement(`div`);
-  node.innerHTML = reviewed;
-  console.log(node);
-  document.getElementById("makeReviewed").appendChild(node);
-  alert ("작성이 완료되었습니다.")
-  };
-  document.getElementById("userName").value='';
-  document.getElementById("password").value='';
-  document.getElementById("reviewtextinput").value='';
+    let userCount = localStorage.getItem('userCount');
+    // 유저 이름, 비밀번호, 리뷰 map 생성, localStorage에 저장
+      let userName = document.getElementById("userName").value; 
+      localStorage.setItem(`${userCount}name`,userName);
+    
+      let password = document.getElementById("password").value;
+      localStorage.setItem(`${userCount}password`,password);
+    
+      let reviewtext = document.getElementById("reviewtextinput").value;
+      localStorage.setItem(`${userCount}reviewtext`,reviewtext);
+      
+      const reviewed = `
+      <div class = "reviewed">
+      <li class="userId">
+      ID : ${userName}
+      </li>
+      <button id="uploadbutton" onclick="delbutton()">Delete</button>
+      <ul>
+          <textarea readonly rows ="8" cols ="85" class="userReview">${reviewtext}</textarea>
+      </ul>
+      </div>
+      `;
+      
+      const node = document.createElement(`div`);
+      node.innerHTML = reviewed;
+      document.getElementById("makeReviewed").appendChild(node);
+      alert ("작성이 완료되었습니다.")
+      document.getElementById("userName").value='';
+      document.getElementById("password").value='';
+      document.getElementById("reviewtextinput").value='';
+
+      ++userCount;
+      localStorage.setItem('userCount',userCount);
 };
+upload.addEventListener('click', ulbutton);
+
+
+localStorage.getItem(`${userCount}name`);
+localStorage.getItem(`${userCount}password`);
+localStorage.getItem(`${userCount}reviewtext`);
+
+
+// // 리뷰창 삭제 기능
+
+// function delbutton(){
+//   localStorage.getItem(`${userCount}name`,`${userCount}password`,`${userCount}reviewtext`);
+
+//   // 버튼 누른 곳의 정보를 삭제합니다
+// localStorage.removeItem(`${userCount}name`);
+// localStorage.removeItem(`${userCount}password`);
+// localStorage.removeItem(`${userCount}reviewtext`);
+// }
