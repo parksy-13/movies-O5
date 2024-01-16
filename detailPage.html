@@ -20,22 +20,22 @@
     <p id="movieTitle"></p>
     <p id="openDate"></p>
     <p id="rank"></p>
-
-    <!-- 리뷰창 구현 -->
-    <div class = "messagebox">
-      <ul>
-      <input id="userName" type="text" placeholder="Name...">
-      <input id="password" type="text" placeholder="Password...">
-      <button id="uploadbutton">Upload</button>
-      </ul>
-      <ul class = reviewbox>
-      <input id="reviewtextinput" class="userReview" type ="textarea" placeholder="Review...">
-      </ul>
-    </div>
-
-    <div id="makeReviewed">
-   <!-- 리뷰 채워지는 공간입니다. -->
-    </div>
+    
+    <!-- 기타 페이지 요소들을 추가할 수 있습니다. -->
+<!-- 리뷰창 구현 -->
+<form class = "messagebox">
+  <ul>
+  <input id="userName" type="text" placeholder="Name...">
+  <input id="password" type="text" placeholder="Password...">
+  <button id="uploadbutton" onclick="ulbutton(event)">Upload</button>
+  </ul>
+  <ul class = reviewbox>
+  <input id="reviewtextinput" class="userReview" type ="textarea" placeholder="Review...">
+  </ul>
+</form>
+<div id="makeReviewed">
+<!-- 리뷰 채워지는 공간입니다. -->
+</div>
 
    <!-- 상세페이지에서 뒤로가기 버튼 -->
    <div class="button-container">

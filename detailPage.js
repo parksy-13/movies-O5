@@ -76,6 +76,7 @@ if (!localStorage.getItem('userCount')) {
   localStorage.setItem('userCount', 0);
 }
 function ulbutton() {
+  event.preventD
   let userCount = localStorage.getItem('userCount');
 
   // 유저 이름, 비밀번호, 리뷰 map 생성, localStorage에 저장
@@ -83,6 +84,49 @@ function ulbutton() {
   localStorage.setItem(`${userCount}name`, userName);
 
   let password = document.getElementById("password").value;
+  let reviewtext = document.getElementById("reviewtextinput").value;
+  const checking = userName.length * password.length * reviewtext.length;
+  let userInfo = { userName: userName, password: password, reviewtext: reviewtext };
+  userInfo = JSON.stringify(userInfo);
+  if (checking === 0){ //작성상태 확인
+      alert("작성이 완료되지 않았습니다.");
+  }
+  else if(!localStorage.getItem('userCount')){ // 웹페이지 초기상태
+      localStorage.setItem('userCount',0);
+      localStorage.setItem(localStorage.getItem('userCount'), userInfo);
+      createcard(userName, reviewtext);
+      ++userCount;
+      localStorage.setItem('userCount',userCount);
+      alert("작성 되었습니다.");
+    }
+  else if (searchvalue(userName) < 0) { //기존 정보가 없고, Id가 겹치지 않을때
+      localStorage.setItem(localStorage.getItem('userCount'), userInfo);
+      createcard(userName, reviewtext);
+      ++userCount;
+      localStorage.setItem('userCount',userCount);
+      alert("작성 되었습니다.");
+    }
+  else if(matchingUser(userName, password)){ //기존 정보가 있을때
+      createcard(userName, reviewtext);
+      alert("작성 되었습니다.");
+  }
+  else { // 그 외
+      alert("Password가 틀렸습니다.");
+  }
+};
+
+function searchvalue(userName){ //userName의 index값을 찾음.
+  let counter = localStorage.getItem('userCount')
+  for (let i = 0; i < counter; i++){
+      let checkUN = JSON.parse(localStorage.getItem(i));
+      console.log(checkUN);
+      if (userName === checkUN["userName"]){
+          console.log(checkUN["userName"]);
+          return i
+      }
+  return -1;
+  }
+}
   localStorage.setItem(`${userCount}password`, password);
   
 
@@ -91,26 +135,11 @@ function ulbutton() {
 
   alert("작성이 완료되었습니다.");
 
-  ++userCount;
-  localStorage.setItem('userCount', userCount);
-};
-upload.addEventListener('click', ulbutton);
-
-
-// 리뷰창 삭제 기능
-
-function delbutton(event) {
-  const li = event.target.parentElement;
-  let targetName = event.target.id;
-  li.remove();
-  localStorage.getItem(`${userCount}name`, userName);
-  localStorage.getItem(`${userCount}password`, password);
-  localStorage.getItem(`${userCount}reviewtext`, reviewtext);
-  
-  localStorage.removeItem();
-  localStorage.removeItem();
-  localStorage.removeItem();
-}
+function matchingUser(userName, password){ //유저가 맞는지에 대한 함수
+  let i = searchvalue(userName);
+  let savedNamed = JSON.parse(localStorage.getItem(i));
+  let savedPassword = JSON.parse(localStorage.getItem(i));
+  return (userName === savedNamed["userName"]) * (password == savedPassword["password"]) ? true : false;
 
 
 function loadComments() {
@@ -137,4 +166,5 @@ function loadComments() {
     listItem.appendChild(button);
     commentList.appendChild(listItem);
   }
+}
 }
