@@ -138,26 +138,3 @@ function loadComments() {
     commentList.appendChild(listItem);
   }
 }
-
-function createcard(userName, reviewtext){ //리뷰카드를 만드는 함수 (잘작동함)
-  const reviewed = `
-  <form class = messagebox>
-      <ul>
-      <li class="userId">
-      ID : ${userName}
-      <input id="cppassword" type="text" placeholder="Password...">
-      <button id="DeleteBtn" onclick="deletecard(event);">Delete</button>
-      </ul>
-      <ul class = reviewbox>
-      <textarea readonly rows ="8" cols ="85" class="userReview">${reviewtext}</textarea>
-      </ul>
-  </form>
-  `;
-  const node = document.createElement(`div`);
-  node.innerHTML = reviewed;
-  console.log(node);
-  document.getElementById("makeReviewed").appendChild(node);
-  document.getElementById("userName").value='';
-  document.getElementById("password").value='';
-  document.getElementById("reviewtextinput").value='';
-};
