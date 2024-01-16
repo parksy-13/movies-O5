@@ -73,29 +73,27 @@ function ulbutton (event){ //생성버튼 clear
   let password = document.getElementById("password").value;
   let reviewtext = document.getElementById("reviewtextinput").value;
   const checking = userName.length * password.length * reviewtext.length;
+  let userInfo = { userName: userName, password: password, reviewtext: reviewtext };
+  userInfo = JSON.stringify(userInfo);
   if (checking === 0){ //작성상태 확인
       alert("작성이 완료되지 않았습니다.");
   }
   else if(!localStorage.getItem('userCount')){ // 웹페이지 초기상태
       localStorage.setItem('userCount',0);
-      localStorage.setItem(`${localStorage.getItem('userCount')}userName`,userName);
-      localStorage.setItem(`${localStorage.getItem('userCount')}password`,password);
-      localStorage.setItem(`${localStorage.getItem('userCount')}reviewtext`,reviewtext);
+      localStorage.setItem(localStorage.getItem('userCount'), userInfo);
       createcard(userName, reviewtext);
       ++userCount;
       localStorage.setItem('userCount',userCount);
       alert("작성 되었습니다.");
     }
-  else if (localStorage.valueOf().indexOf === -1) { //기존 정보가 없고, Id가 겹치지 않을때 (현재 작동 안함)
-      localStorage.setItem(`${localStorage.getItem('userCount')}userName`,userName);
-      localStorage.setItem(`${localStorage.getItem('userCount')}password`,password);
-      localStorage.setItem(`${localStorage.getItem('userCount')}reviewtext`,reviewtext);
+  else if (searchvalue(userName) < 0) { //기존 정보가 없고, Id가 겹치지 않을때
+      localStorage.setItem(localStorage.getItem('userCount'), userInfo);
       createcard(userName, reviewtext);
       ++userCount;
       localStorage.setItem('userCount',userCount);
       alert("작성 되었습니다.");
     }
-  else if(matchingUser(userName, password)){ //기존 정보가 있을때  (이것만 작동하는듯? 근거 : 유저카운트가 안올라감)
+  else if(matchingUser(userName, password)){ //기존 정보가 있을때
       createcard(userName, reviewtext);
       alert("작성 되었습니다.");
   }
@@ -104,22 +102,26 @@ function ulbutton (event){ //생성버튼 clear
   }
 };
 
-function searchvalue (userName){
-  let i = 0;
-  while (true) {
-  let foundPos = [localStorage.valueOf()].indexOf(userName, pos);
-  if (foundPos == -1) break;
-  document.writeln( foundPos );
-  i = foundPos + 1; 
-}
+function searchvalue(userName){ //userName의 index값을 찾음.
+  let counter = localStorage.getItem('userCount')
+  for (let i = 0; i < counter; i++){
+      let checkUN = JSON.parse(localStorage.getItem(i));
+      console.log(checkUN);
+      if (userName === checkUN["userName"]){
+          console.log(checkUN["userName"]);
+          return i
+      }
+  return -1;
+  }
 }
 
 
-function matchingUser(userName, password){ //유저가 맞는지에 대한 함수 불안정함 (작동안함)
-  let i = localStorage[userName].valueOf();
-  const savedName = localStorage.getItem(`${i}name`);
-  const savedPassword = localStorage.getItem(`${i}password`);
-  return (userName, password) => userName === savedName * password === savedPassword ? true : false;
+function matchingUser(userName, password){ //유저가 맞는지에 대한 함수
+  let i = searchvalue(userName);
+  let savedNamed = JSON.parse(localStorage.getItem(i));
+  let savedPassword = JSON.parse(localStorage.getItem(i));
+  return (userName === savedNamed["userName"]) * (password == savedPassword["password"]) ? true : false;
+
 };
 
 function createcard(userName, reviewtext){ //리뷰카드를 만드는 함수 (잘작동함)
@@ -147,15 +149,16 @@ function createcard(userName, reviewtext){ //리뷰카드를 만드는 함수 (�
 
 function deletecard(event){ // 삭제기능 (무조건 비밀번호가 다르다고 뜸)
   event.preventDefault();
+  const li = event.target.parentElement;
   let cppassword = document.getElementById("cppassword").value;
-  if (cppassword === localStorage.getItem('password')){
-      localStorage.removeItem('userName');
-      localStorage.removeItem('password');
-      localStorage.removeItem('reviewtext');
+  for(let i=0;i<localStorage.getItem('userCount');i++){
+    if (cppassword === localStorage.getItem(`${i}password`)){
+      localStorage.removeItem(`${i}userName`);
+      localStorage.removeItem(`${i}password`);
+      localStorage.removeItem(`${i}reviewtext`);
       alert("삭제되었습니다.")
-      location.reload(true)
+      location.reload(true);
+      li.remove();
   }
-  else {
-      alert("비밀번호가 다릅니다.")
-  }
+}
 }
