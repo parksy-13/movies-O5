@@ -1,8 +1,3 @@
-//리뷰창 보이도록 하는 함수
-window.onload = function () {
-  loadComments();
-}
-
 // 브라우저의 뒤로 가기 기능 사용
 function goBack() {
   window.history.back();
@@ -49,92 +44,118 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src ='./posters/no${rank}.jpg' alt="" style="width:20%;height:10%;border:auto; justify-content: center">
             <p>영화 제목: ${movieInfo.movieNm}</p>
             <p>장르: ${movieInfo.genres
-            .map((genre) => genre.genreNm)
-            .join(", ")}</p>
+              .map((genre) => genre.genreNm)
+              .join(", ")}</p>
             <p>감독: ${movieInfo.directors
-            .map((director) => director.peopleNm)
-            .join(", ")}</p>
+              .map((director) => director.peopleNm)
+              .join(", ")}</p>
             <p>제작년도: ${movieInfo.prdtYear}</p>
             <p>개봉일: ${movieInfo.openDt}</p>
             <p>상영시간: ${movieInfo.showTm}분</p>
             <!-- <p>등급: ${movieInfo.audit}</p> undifined 떠서 주석 처리 함-->
             <p>배우: ${movieInfo.actors
-            .map((actors) => actors.peopleNm)
-            .join(", ")}</p>
+              .map((actors) => actors.peopleNm)
+              .join(", ")}</p>
             <!-- 나머지 상세 정보 표시 추가 가능.. -->
           `;
       })
+      .catch((error) => console.error("영화 상세 정보 가져오기 오류:", error));
   } else {
     console.log("Data not found in local storage");
   }
 });
 
-// 리뷰창 업로드 기능
-// 새로고침하면 전역변수도 새로 선언되므로 count도 localStorage에 저장합니다.
-const upload = document.getElementById('uploadbutton');
-if (!localStorage.getItem('userCount')) {
-  localStorage.setItem('userCount', 0);
-}
-function ulbutton() {
+function ulbutton (event){ //생성버튼 clear
+  event.preventDefault();
   let userCount = localStorage.getItem('userCount');
-
-  // 유저 이름, 비밀번호, 리뷰 map 생성, localStorage에 저장
   let userName = document.getElementById("userName").value;
-  localStorage.setItem(`${userCount}name`, userName);
-
   let password = document.getElementById("password").value;
-  localStorage.setItem(`${userCount}password`, password);
-  
-
   let reviewtext = document.getElementById("reviewtextinput").value;
-  localStorage.setItem(`${userCount}reviewtext`, reviewtext);
-
-  alert("작성이 완료되었습니다.");
-
-  ++userCount;
-  localStorage.setItem('userCount', userCount);
-};
-upload.addEventListener('click', ulbutton);
-
-
-// 리뷰창 삭제 기능
-
-function delbutton(event) {
-  const li = event.target.parentElement;
-  let targetName = event.target.id;
-  li.remove();
-  localStorage.getItem(`${userCount}name`, userName);
-  localStorage.getItem(`${userCount}password`, password);
-  localStorage.getItem(`${userCount}reviewtext`, reviewtext);
-  
-  localStorage.removeItem();
-  localStorage.removeItem();
-  localStorage.removeItem();
-}
-
-
-function loadComments() {
-  let userCount = localStorage.getItem('userCount');
-
-  let commentList = document.getElementById('makeReviewed');
-  commentList.innerHTML = '';
-
-  for (let i = 0; i <= userCount; i++) {
-    let name = localStorage.getItem(`${i}name`);
-    let reviewtext = localStorage.getItem(`${i}reviewtext`);
-    let listItem = document.createElement('li');
-    const button = document.createElement('button');
-    button.innerText = "Delete";
-    button.addEventListener('click', delbutton);
-    listItem.innerHTML = `
-    <div id = "reviewItem">
-  ID : ${name}
-  </div>
-  <ul>
-      <textarea readonly rows ="5" cols ="70" class="userReview">${reviewtext}</textarea>
-  </ul>
-  `
-    listItem.appendChild(button);
-    commentList.appendChild(listItem);
+  const checking = userName.length * password.length * reviewtext.length;
+  let userInfo = { userName: userName, password: password, reviewtext: reviewtext };
+  userInfo = JSON.stringify(userInfo);
+  if (checking === 0){ //작성상태 확인
+      alert("작성이 완료되지 않았습니다.");
   }
+  else if(!localStorage.getItem('userCount')){ // 웹페이지 초기상태
+      localStorage.setItem('userCount',0);
+      localStorage.setItem(localStorage.getItem('userCount'), userInfo);
+      createcard(userName, reviewtext);
+      ++userCount;
+      localStorage.setItem('userCount',userCount);
+      alert("작성 되었습니다.");
+    }
+  else if (searchvalue(userName) < 0) { //기존 정보가 없고, Id가 겹치지 않을때
+      localStorage.setItem(localStorage.getItem('userCount'), userInfo);
+      createcard(userName, reviewtext);
+      ++userCount;
+      localStorage.setItem('userCount',userCount);
+      alert("작성 되었습니다.");
+    }
+  else if(matchingUser(userName, password)){ //기존 정보가 있을때
+      createcard(userName, reviewtext);
+      alert("작성 되었습니다.");
+  }
+  else { // 그 외
+      alert("Password가 틀렸습니다.");
+  }
+};
+function searchvalue(userName){ //userName의 index값을 찾음.
+  let counter = localStorage.getItem('userCount')
+  for (let i = 0; i < counter; i++){
+      let checkUN = JSON.parse(localStorage.getItem(i));
+      console.log(checkUN);
+      if (userName === checkUN["userName"]){
+          console.log(checkUN["userName"]);
+          return i
+      }
+  return -1;
+  }
+}
+  //for(let i = 0; i < [localStorage][0].length; i++) {
+      //if(userName === localStorage.getItem(`${i}userName`)){
+          //return true;
+      //}
+function matchingUser(userName, password){ //유저가 맞는지에 대한 함수
+  let i = searchvalue(userName);
+  let savedNamed = JSON.parse(localStorage.getItem(i));
+  let savedPassword = JSON.parse(localStorage.getItem(i));
+  return (userName === savedNamed["userName"]) * (password == savedPassword["password"]) ? true : false;
+};
+function createcard(userName, reviewtext){ //리뷰카드를 만드는 함수 (잘작동함)
+  const reviewed = `
+  <form class = messagebox>
+      <ul>
+      <li class="userId">
+      ID : ${userName}
+      <input id="cppassword" type="text" placeholder="Password...">
+      <button id="DeleteBtn" onclick="deletecard(event);">Delete</button>
+      </ul>
+      <ul class = reviewbox>
+      <textarea readonly rows ="8" cols ="85" class="userReview">${reviewtext}</textarea>
+      </ul>
+  </form>
+  `;
+  const node = document.createElement(`div`);
+  node.innerHTML = reviewed;
+  console.log(node);
+  document.getElementById("makeReviewed").appendChild(node);
+  document.getElementById("userName").value='';
+  document.getElementById("password").value='';
+  document.getElementById("reviewtextinput").value='';
+};
+function deletecard(event){ // 삭제기능 (무조건 비밀번호가 다르다고 뜸)
+  event.preventDefault();
+  const li = event.target.parentElement;
+  let cppassword = document.getElementById("cppassword").value;
+  for(let i=0;i<localStorage.getItem('userCount');i++){
+    if (cppassword === localStorage.getItem(`${i}password`)){
+      localStorage.removeItem(`${i}userName`);
+      localStorage.removeItem(`${i}password`);
+      localStorage.removeItem(`${i}reviewtext`);
+      alert("삭제되었습니다.")
+      location.reload(true);
+      li.remove();
+  }
+}
 }
