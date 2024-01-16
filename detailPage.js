@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// 리뷰창 구현현
 function ulbutton (event){ //생성버튼 clear
   event.preventDefault();
 
@@ -114,10 +115,6 @@ function searchvalue(userName){ //userName의 index값을 찾음.
   return -1;
   }
 }
-  //for(let i = 0; i < [localStorage][0].length; i++) {
-      //if(userName === localStorage.getItem(`${i}userName`)){
-          //return true;
-      //}
 
 function matchingUser(userName, password){ //유저가 맞는지에 대한 함수
   let i = searchvalue(userName);
@@ -146,18 +143,3 @@ function createcard(userName, reviewtext){ //리뷰카드를 만드는 함수 (�
   document.getElementById("password").value='';
   document.getElementById("reviewtextinput").value='';
 };
-function deletecard(event){ // 삭제기능 (무조건 비밀번호가 다르다고 뜸)
-  event.preventDefault();
-  const li = event.target.parentElement;
-  let cppassword = document.getElementById("cppassword").value;
-  for(let i=0;i<localStorage.getItem('userCount');i++){
-    if (cppassword === localStorage.getItem(`${i}password`)){
-      localStorage.removeItem(`${i}userName`);
-      localStorage.removeItem(`${i}password`);
-      localStorage.removeItem(`${i}reviewtext`);
-      alert("삭제되었습니다.")
-      location.reload(true);
-      li.remove();
-  }
-}
-}
