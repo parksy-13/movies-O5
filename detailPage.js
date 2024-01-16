@@ -67,9 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function ulbutton (event){ //생성버튼 clear
   event.preventDefault();
+
   let userCount = localStorage.getItem('userCount');
   let userName = document.getElementById("userName").value;
   let password = document.getElementById("password").value;
+
   let reviewtext = document.getElementById("reviewtextinput").value;
   const checking = userName.length * password.length * reviewtext.length;
   let userInfo = { userName: userName, password: password, reviewtext: reviewtext };
@@ -116,11 +118,13 @@ function searchvalue(userName){ //userName의 index값을 찾음.
       //if(userName === localStorage.getItem(`${i}userName`)){
           //return true;
       //}
+
 function matchingUser(userName, password){ //유저가 맞는지에 대한 함수
   let i = searchvalue(userName);
   let savedNamed = JSON.parse(localStorage.getItem(i));
   let savedPassword = JSON.parse(localStorage.getItem(i));
   return (userName === savedNamed["userName"]) * (password == savedPassword["password"]) ? true : false;
+
 };
 function createcard(userName, reviewtext){ //리뷰카드를 만드는 함수 (잘작동함)
   const reviewed = `
