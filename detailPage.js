@@ -65,14 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// 리뷰창 구현현
+// 리뷰창 구현
+
 function ulbutton (event){ //생성버튼 clear
   event.preventDefault();
-
   let userCount = localStorage.getItem('userCount');
   let userName = document.getElementById("userName").value;
   let password = document.getElementById("password").value;
-
   let reviewtext = document.getElementById("reviewtextinput").value;
   const checking = userName.length * password.length * reviewtext.length;
   let userInfo = { userName: userName, password: password, reviewtext: reviewtext };
